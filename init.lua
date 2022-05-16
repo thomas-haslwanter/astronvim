@@ -1,3 +1,5 @@
+-- User file for Thomas Haslwanter
+--
 local config = {
 
   -- Set colorscheme
