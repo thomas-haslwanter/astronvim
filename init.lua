@@ -1,17 +1,33 @@
 -- User file for Thomas Haslwanter
 --
+local cmd = vim.cmd
+local  tab = 4
 local config = {
 
   -- Set colorscheme
-  colorscheme = "disciple",
+  -- colorscheme = "disciple",
+  colorscheme = "everforest",
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   options = {
     opt = {
       relativenumber = true, -- sets vim.opt.relativenumber
+      autochdir = true,
+      ignorecase = true,
+      wrapmargin = 4,
+      textwidth = 80,
+      background = 'dark', 
+      colorcolumn = '80',
+      foldmethod = 'indent',
+      -- tab options
+      shiftwidth = tab,
+      tabstop = tab,
+      expandtab = true,
+      autoindent = true,
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
+      python3_host_prog = 'C:\\Programs\\WPy64-39100\\python-3.9.10.amd64\\python.exe'
     },
   },
 
@@ -50,7 +66,15 @@ local config = {
          { "vim-scripts/pyte" },
          { "ishan9299/nvim-solarized-lua" },
          { "lervag/vimtex" },
+         { "tpope/vim-fugitive" },
          { "tpope/vim-unimpaired" },
+         { "tpope/vim-surround" },
+         { "tpope/vim-commentary" },
+         { "tpope/vim-repeat" },
+         { "tpope/vim-obsession" },
+         { "tpope/vim-vinegar" },
+         { "Konfekt/FastFold" },
+         { "rafcamlet/nvim-whid" },
       -- {
       --   "ray-x/lsp_signature.nvim",
       --   event = "BufRead",
@@ -191,6 +215,7 @@ local config = {
   -- good place to configure mappings and vim options
   polish = function()
     -- Set key bindings
+      -- cmd [[ autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
     vim.keymap.set("n", "<C-s>", ":w!<CR>")
 
     -- Set autocommands
@@ -220,6 +245,8 @@ local config = {
         pattern = "*.py",
         callback = function(args)
             vim.api.nvim_win_set_option(0, 'foldmethod', 'indent')
+            vim.api.nvim_command('colorscheme pyte')
+            vim.keymap.set("n", "<F9>", ":exec '!python' shellescape(@%, 1)<cr>")
         end,
         desc = "Set foldmethod for Python",
     }) end,
@@ -227,3 +254,7 @@ local config = {
 }
 
 return config
+
+      -- cmd [[ autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+      --     autocmd FileType python colorscheme pyte
+      -- ]],
